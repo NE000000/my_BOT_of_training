@@ -9,7 +9,7 @@ default_Intents.members = True
 client = discord.Client(intents=default_Intents)
 
 
-class BotTom(commands.Bot):
+class BotTest(commands.Bot):
     def __init__(self):
         super().__init__(command_prefix='!')
 
@@ -22,13 +22,13 @@ class BotTom(commands.Bot):
         print(f"{self.user} est connecté au serveur")
 
 # commande 'start' pour allumer le bot dans le serveur
-        @BotTom.command(self, name='start')
+        @BotTest.command(self, name='start')
         async def on_message(ctx):
             await ctx.channel.send("Le bot est lancé !", delete_after=5)
             print(f"'{self.user.name}' a été lancé !")
 
 # commande 'clear' pour supprimer des messages dans le serveur
-            @BotTom.command(self, name='clear')
+            @BotTest.command(self, name='clear')
             async def delete(ctx, number_of_messages: int):
                 messages = await ctx.channel.history(limit=number_of_messages + 1).flatten()
                 print(f"Messages supprimées : {number_of_messages}")
@@ -37,5 +37,5 @@ class BotTom(commands.Bot):
                     await each_message.delete()
 
 
-bot_test = BotTom()
+bot_test = BotTest()
 bot_test.run(os.getenv("TOKEN"))
